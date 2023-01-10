@@ -6,13 +6,11 @@
 {% endblock %}
 
 {% block content %}
-  <h1>{{group.description}}</h1>
+  <h1>{{group.description|linebreaks}}</h1>
+  <p>
+    Группа: {{ group.title }}
+  </p>
   {% for post in posts %}
-    {% if forloop.first %}
-      <p>
-        Группа {{ group.title }}
-      </p>
-    {% endif %}
     <article>
       <ul>
         <li>

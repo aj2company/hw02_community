@@ -19,7 +19,6 @@
       </ul>
       <p>{{ post.text|linebreaks }}</p>
       {% if post.group %}
-        Группа: 
         <a href="{% url 'posts:groups' post.group.slug %}">
           #{{ post.group.title }}
         </a>
