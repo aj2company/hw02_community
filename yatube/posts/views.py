@@ -1,11 +1,14 @@
 # posts/views.py
 from django.shortcuts import render, get_object_or_404
+
 from .models import Post, Group
+
+POST_IN_PAGE = 10
 
 
 def index(request):
     template = 'posts/index.html'
-    posts = Post.objects.order_by('-pub_date')[:10]
+    posts = Post.objects.all()[:POST_IN_PAGE]
     context = {
         'posts': posts,
     }
@@ -14,7 +17,7 @@ def index(request):
 
 def group_posts(request, slug):
     group = get_object_or_404(Group, slug=slug)
-    posts = Post.objects.filter(group=group).order_by('-pub_date')[:10]
+    posts = group.posts.all()[:POST_IN_PAGE]
     context = {
         'group': group,
         'posts': posts,

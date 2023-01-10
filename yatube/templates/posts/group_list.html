@@ -1,30 +1,29 @@
 <!-- templates/posts/group_list.html -->
 {% extends 'base.html' %}
-{% load static %}
+
 {% block title %}
-  {{group.description}}
+  {{group.title}}
 {% endblock %}
+
 {% block content %}
-      <div class="container py-5">
-        <h1>{{group.description}}</h1>
-        {% if not forloop.first %}
-        <p>
-          Группа {{ group.title }}
-        </p>
-        {% endif %}
-          <article>
-            {% for post in posts %}
-              <ul>
-                <li>
-                  Автор: {{ post.author.get_full_name }}
-                </li>
-                <li>
-                  Дата публикации: {{ post.pub_date|date:"d E Y" }}
-                </li>
-              </ul>
-              <p>{{ post.text }}</p>
-              {% if not forloop.last %}<hr>{% endif %}
-              {% endfor %}
-          </article>
-        </div>
+  <h1>{{group.description}}</h1>
+  {% for post in posts %}
+    {% if forloop.first %}
+      <p>
+        Группа {{ group.title }}
+      </p>
+    {% endif %}
+    <article>
+      <ul>
+        <li>
+          Автор: {{ post.author.get_full_name }}
+        </li>
+        <li>
+          Дата публикации: {{ post.pub_date|date:"d E Y" }}
+        </li>
+      </ul>
+      <p>{{ post.text|linebreaks }}</p>
+      {% if not forloop.last %}<hr>{% endif %}
+    </article>
+  {% endfor %}
 {% endblock %}
